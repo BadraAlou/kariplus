@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block title %}Historique des commandes{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h4 class="text-center mb-4">Historique des commandes</h4>
+
+    {% if commandes_with_totals %}
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered table-hover custom-table">
+            <thead class="thead-light">
+                <tr>
+                    <th scope="col">ID de la commande</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Produits</th>
+                    <th scope="col">Prix total</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in commandes_with_totals %}
+                <tr>
+                    <td>{{ item.commande.id }}</td>
+                    <td>{{ item.commande.date_commande|date:"d-m-Y H:i:s" }}</td>
+                    <td>
+                        <ul class="list-unstyled">
+                            {% for article in item.commande.articlecommande_set.all %}
+                            <li>{{ article.produit.nom }} ({{ article.quantité }})</li>
+                            {% endfor %}
+                        </ul>
+                    </td>
+                    <td>{{ item.total_prix|floatformat:2 }} FCFA</td>
+                    <td>
+                        <a href="{% url 'generer_facture' item.commande.id %}" class="btn btn-success btn-sm">Télécharger</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% else %}
+    <div class="alert alert-info" role="alert">
+        <h2 class="text-center">Vous n'avez pas encore passé de commandes.</h2>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

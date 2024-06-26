@@ -1,0 +1,108 @@
+{% extends "base.html" %}
+{% block content %}
+{% load static %}
+    <!-- Hero Start -->
+    <div class="container-fluid bg-primary hero-header mb-5">
+        <div class="container">
+            <div class="row g-5 align-items-center">
+                <div class="col-lg-6 text-center text-lg-start">
+                    <h3 class="fw-light text-white animated slideInRight">Bienvenue</h3>
+                    <h1 class="display-4 text-white animated slideInRight">Chez <span class="fw-light text-dark">KARIPLUS</span></h1>
+                    <p class="text-white mb-4 animated slideInRight">Chaque étape de notre processus est guidée par l'excellence et la passion. Nous sélectionnons soigneusement les meilleurs fruits de karité pour créer des produits de beauté purs et nourrissants, offrant ainsi à nos clients une expérience luxueuse et naturelle.</p>
+                    <a href="{% url 'produits' %}" class="btn btn-dark py-2 px-4 me-3 animated slideInRight">Nos Produits</a>
+                    <a href="{% url 'contacts' %}" class="btn btn-outline-dark py-2 px-4 animated slideInRight">Nous Contacter</a>
+                </div>
+                <div class="col-lg-6">
+                    <img class="img-fluid animated pulse infinite" src="static/img/accueil1.png" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Hero End -->
+<!-- Feature Start -->
+<div class="container-fluid py-5">
+    <div class="container">
+        <div class="mx-auto text-center wow fadeIn" data-wow-delay="0.1s" style="max-width: 600px;">
+            <h1 class="text-primary mb-3"><span class="fw-light text-dark">Les Meilleurs Avantages de nos produits </span> KARIPLUS</h1>
+            <p class="mb-5">C'est la magie du karité lui-même. Connue pour ses propriétés hydratantes, apaisantes et régénérantes, cette précieuse substance est un véritable trésor pour votre peau. Que vous recherchiez une crème hydratante luxueuse, un baume nourrissant pour les lèvres ou un traitement revitalisant pour les cheveux, vous trouverez votre bonheur chez KARIPLUS.</p>
+        </div>
+        <div class="row g-4 align-items-center">
+            <div class="col-lg-4 wow fadeIn" data-wow-delay="0.3s">
+                <div class="row g-5">
+                    <div class="col-12 d-flex">
+                        <div class="btn-square rounded-circle border flex-shrink-0" style="width: 80px; height: 80px;">
+                            <i class="fa fa-check fa-2x text-primary"></i>
+                        </div>
+                        <div class="ps-3">
+                            <h5>Naturel & Bio</h5>
+                            <hr class="w-25 bg-primary my-2">
+                            <span>Fabriqué avec des ingrédients naturels et biologiques pour un soin doux.</span>
+                        </div>
+                    </div>
+                    <div class="col-12 d-flex">
+                        <div class="btn-square rounded-circle border flex-shrink-0" style="width: 80px; height: 80px;">
+                            <i class="fa fa-check fa-2x text-primary"></i>
+                        </div>
+                        <div class="ps-3">
+                            <h5>Anti-Chute de Cheveux</h5>
+                            <hr class="w-25 bg-primary my-2">
+                            <span>Réduit la chute des cheveux et favorise la croissance.</span>
+                        </div>
+                    </div>
+                    <div class="col-12 d-flex">
+                        <div class="btn-square rounded-circle border flex-shrink-0" style="width: 80px; height: 80px;">
+                            <i class="fa fa-check fa-2x text-primary"></i>
+                        </div>
+                        <div class="ps-3">
+                            <h5>Anti-Pelliculaire</h5>
+                            <hr class="w-25 bg-primary my-2">
+                            <span>Élimine les pellicules et prévient leur réapparition.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 wow fadeIn" data-wow-delay="0.1s">
+                <img class="img-fluid animated pulse infinite" src="{% static 'img/apropos.jpg' %}" alt="Karité ">
+            </div>
+            <div class="col-lg-4 wow fadeIn" data-wow-delay="0.5s">
+                <div class="row g-5">
+                    <div class="col-12 d-flex">
+                        <div class="btn-square rounded-circle border flex-shrink-0" style="width: 80px; height: 80px;">
+                            <i class="fa fa-check fa-2x text-primary"></i>
+                        </div>
+                        <div class="ps-3">
+                            <h5>Aucun Effet Secondaire Interne</h5>
+                            <hr class="w-25 bg-primary my-2">
+                            <span>Sans produits chimiques agressifs pour un soin sûr.</span>
+                        </div>
+                    </div>
+                    <div class="col-12 d-flex">
+                        <div class="btn-square rounded-circle border flex-shrink-0" style="width: 80px; height: 80px;">
+                            <i class="fa fa-check fa-2x text-primary"></i>
+                        </div>
+                        <div class="ps-3">
+                            <h5>Pas d'Irritation de la Peau</h5>
+                            <hr class="w-25 bg-primary my-2">
+                            <span>Convient aux cuirs chevelus sensibles et irrités.</span>
+                        </div>
+                    </div>
+                    <div class="col-12 d-flex">
+                        <div class="btn-square rounded-circle border flex-shrink-0" style="width: 80px; height: 80px;">
+                            <i class="fa fa-check fa-2x text-primary"></i>
+                        </div>
+                        <div class="ps-3">
+                            <h5>Sans Odeur Artificielle</h5>
+                            <hr class="w-25 bg-primary my-2">
+                            <span>Parfum naturel pour une expérience agréable.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Feature End -->
+
+{% endblock %}
+
+

@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+Confirmation de Commande
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center align-items-center vh-100">
+        <div class="col-md-8 text-center">
+            <div class="confirmation">
+                <h1 class="display-4 mb-4">Merci pour votre commande !</h1>
+                <p class="lead">Votre commande a été passée avec succès. Vous recevrez bientôt une confirmation par e-mail et elle sera livrée dans les plus brefs délais.</p>
+
+                {% if commande.id %}
+                <p><a href="{% url 'generer_facture' commande.id %}" class="btn btn-primary btn-lg">Télécharger la facture</a></p>
+                <form action="{% url 'annuler_commande' commande.id %}" method="post" style="display: inline;">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger btn-lg">Annuler la commande</button>
+                </form>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+<style>
+.confirmation {
+    background-color: #f8f9fa;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+.validation-sign {
+    max-width: 100px; /* Ajustement de la taille maximale de l'image */
+    height: auto; /* Assurer la proportionnalité de l'image */
+    display: block; /* Pour centrer l'image horizontalement */
+    margin: 0 auto 20px; /* Espacement sous l'image */
+}
+
+.confirmation p {
+    font-size: 1.2rem;
+}
+
+.confirmation a {
+    text-decoration: none;
+    margin-top: 20px;
+}
+
+.confirmation a:hover {
+    text-decoration: underline;
+}
+</style>

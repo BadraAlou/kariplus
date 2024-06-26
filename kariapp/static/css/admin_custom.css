@@ -1,0 +1,40 @@
+/* static/css/admin_custom.css */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+}
+
+.admin-site-header {
+    background-color: #c56868;
+    color: white;
+}
+
+.model-category, .model-product, .model-order, .model-payment, .model-cart, .model-review {
+    background-color: #ffffff;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+}
+
+.model-category th, .model-product th, .model-order th, .model-payment th, .model-cart th, .model-review th {
+    color: #c56868;
+    font-weight: bold;
+}
+
+.model-category td, .model-product td, .model-order td, .model-payment td, .model-cart td, .model-review td {
+    color: #333;
+}
+
+/* Améliorations des boutons */
+button, .button {
+    background-color: #c56868;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover, .button:hover {
+    background-color: #c56868;
+}

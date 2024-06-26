@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<!-- Hero Start -->
+<div class="container-fluid bg-primary hero-header mb-5">
+    <div class="container text-center">
+        <h1 class="display-4 text-white mb-3 animated slideInDown">Panier</h1>
+
+    </div>
+</div>
+<!-- Hero End -->
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-lg">
+                <div class="card-body">
+                    <h2 class="card-title text-center mb-4">Votre Panier</h2>
+
+                    {% if articles_panier %}
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th>Produit</th>
+                                    <th>Quantité</th>
+                                    <th>Prix unitaire</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for article in articles_panier %}
+                                <tr>
+                                    <td>{{ article.produit.nom }}</td>
+                                    <td>
+                                        <form method="post" action="{% url 'modifier_quantite_panier' article.id %}" class="form-inline">
+                                            {% csrf_token %}
+                                            <input type="number" name="quantite" value="{{ article.quantite }}" min="1" max="10" class="form-control mr-2">
+                                            <button type="submit" class="btn btn-primary">Modifier</button>
+                                        </form>
+                                    </td>
+                                    <td>{{ article.produit.prix | floatformat:2 }} Fcfa</td>
+                                    <td>
+                                        <form method="post" action="{% url 'supprimer_du_panier' article.id %}">
+                                            {% csrf_token %}
+                                            <button type="submit" class="btn btn-danger">Supprimer</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="text-center mt-4">
+                        <h4>Prix total: {{ total_prix }} Fcfa</h4>
+                    </div>
+                    <div class="text-center mt-4">
+                        <form method="post" action="{% url 'passer_commande' %}">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-success btn-lg">Passer commande</button>
+                        </form>
+                    </div>
+                    {% else %}
+                    <div class="text-center">
+                        <h4>Votre panier est vide.</h4>
+                        <p class="mt-3">Merci de choisir des <a href="{% url 'produits' %}" class="text-primary">produits</a>.</p>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

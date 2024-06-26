@@ -1,0 +1,188 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>KARIPLUS</title>
+    <!-- Favicon -->
+    <link href="{% static 'img/logo.png' %}" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500&family=Poppins:wght@200;600;700&display=swap" rel="stylesheet">
+
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="{% static 'lib/animate/animate.min.css' %}" rel="stylesheet">
+    <link href="{% static 'lib/owlcarousel/assets/owl.carousel.min.css' %}" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Spinner Start -->
+    <div id="spinner"
+        class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+        <div class="spinner-grow text-primary" style="width: 3rem; height: 3rem;" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+    <!-- Spinner End -->
+
+<!-- Navbar Start -->
+<div class="container-fluid sticky-top" style="background-color: #90BC79;">
+    <div class="container">
+        <nav class="navbar navbar-expand-lg navbar-light p-0">
+            <a href="{% url 'accueil' %}" class="navbar-brand d-flex align-items-center">
+                <img src="{% static 'img/logo.jpg' %}" alt="Logo" class="logo img-fluid rounded-circle" id="navbar-logo">
+                <h2 class="ms-2 mb-0 text-white">KARIPLUS</h2>
+            </a>
+            <button type="button" class="navbar-toggler ms-auto me-0" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <div class="navbar-nav ms-auto">
+                    <a href="{% url 'accueil' %}" class="nav-item nav-link">Accueil</a>
+                    <a href="{% url 'produits' %}" class="nav-item nav-link">Produits</a>
+                    <a href="{% url 'about_us' %}" class="nav-item nav-link">À Propos</a>
+                    <a href="{% url 'contacts' %}" class="nav-item nav-link">Contacts</a>
+                    {% if user.is_authenticated %}
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Bonjour, {{ user.username }} <i class="bi bi-person"></i>
+                        </a>
+                        <div class="dropdown-menu bg-light mt-2">
+                            <a href="{% url 'historique_commandes' %}" class="dropdown-item">Historique des commandes</a>
+                            <a href="{% url 'deconnexion' %}" class="dropdown-item">Déconnexion</a>
+                        </div>
+                    </div>
+                    {% else %}
+                    <a href="{% url 'connexion' %}" class="nav-item nav-link">Connexion</a>
+                    {% endif %}
+                    <a href="{% url 'voir_panier' %}" class="nav-item nav-link position-relative d-inline-block">
+                        <i class="bi bi-cart3" style="font-size: 2rem;"></i>
+                        <span id="panier_notification" class="badge bg-primary top-0 end-0 translate-middle">{{ panier_total_produits }}</span>
+                    </a>
+                </div>
+            </div>
+        </nav>
+    </div>
+</div>
+<!-- Navbar End -->
+
+    {% block content %}
+    {% endblock %}
+
+    <!-- Footer Start -->
+    <footer>
+        <div class="container-fluid footer" style="background: url('{% static 'img/bg.png' %}') no-repeat center center; background-size: cover;">
+            <div class="container py-5">
+                <div class="row g-5">
+                    <div class="col-md-6 col-lg-3 wow fadeIn" data-wow-delay="0.1s">
+                        <a href="{% url 'accueil' %}" class="d-inline-block mb-3">
+                            <h1 class="text-primary">KARIPLUS</h1>
+                        </a>
+                        <p class="mb-0">Notre entreprise se consacre à la création de produits cosmétiques innovants enrichis en beurre de karité, offrant une expérience de soin luxueuse qui nourrit, hydrate et protège la peau et les cheveux.</p>
+                    </div>
+                    <div class="col-md-6 col-lg-3 wow fadeIn" data-wow-delay="0.3s">
+                        <h5 class="mb-4">Contact</h5>
+                        <p><i class="fa fa-map-marker-alt me-3"></i>Bko-Mali,Djalakorobougou</p>
+                        <p><i class="fa fa-phone-alt me-3"></i>+223 92 36 13 39</p>
+                        <p><i class="fa fa-envelope me-3"></i>contact@kariplus-mali.com</p>
+                        <div class="d-flex pt-2">
+                            <a class="btn btn-square btn-outline-primary me-1" href="#"><i class="fab fa-facebook-f"></i></a>
+                            <a class="btn btn-square btn-outline-primary me-1" href="#"><i class="fab fa-instagram"></i></a>
+                            <a class="btn btn-square btn-outline-primary me-1" href="#"><i class="fab fa-tiktok"></i></a>
+                            <a class="btn btn-square btn-outline-primary me-1" href="#"><i class="fab fa-snapchat-ghost"></i></a>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-3 wow fadeIn" data-wow-delay="0.5s">
+                        <h5 class="mb-4">Nos Services</h5>
+                        <a class="btn btn-link" href="{% url 'produits' %}">Esthétique et beauté</a>
+                        <a class="btn btn-link" href="{% url 'produits' %}">Remède et Santé</a>
+                    </div>
+                    <div class="col-md-6 col-lg-3 wow fadeIn" data-wow-delay="0.7s">
+                        <h5 class="mb-4">Liens populaires</h5>
+                        <a class="btn btn-link" href="{% url 'about_us' %}">À propos de nous</a>
+                        <a class="btn btn-link" href="{% url 'contacts' %}">Nos contacts</a>
+                    </div>
+                </div>
+            </div>
+            <div class="container wow fadeIn" data-wow-delay="0.1s">
+                <div class="copyright">
+                    <div class="row">
+                        <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                            &copy; 2024 <a class="border-bottom" href="#">KARIPLUS</a>, Tous les droits sont réservés.
+                        </div>
+                        <div class="col-md-6 text-center text-md-end">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- Footer End -->
+
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+
+    <!-- JavaScript Libraries -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{% static 'lib/wow/wow.min.js' %}"></script>
+    <script src="{% static 'lib/easing/easing.min.js' %}"></script>
+    <script src="{% static 'lib/waypoints/waypoints.min.js' %}"></script>
+    <script src="{% static 'lib/owlcarousel/owl.carousel.min.js' %}"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- Template Javascript -->
+    <script src="{% static 'js/main.js' %}"></script>
+</body>
+</html>
+
+<style>
+    /* Animation pour le logo */
+    #navbar-logo {
+        max-height: 80px; /* Hauteur maximale du logo */
+        width: auto;
+        transition: transform 0.3s ease-in-out; /* Transition douce pour l'effet de survol */
+    }
+
+    #navbar-logo:hover {
+        transform: scale(1.1); /* Zoom léger au survol */
+    }
+
+    /* Styles supplémentaires pour la navbar */
+    .navbar-nav .nav-link {
+        color: white; /* Couleur du texte des liens */
+        transition: color 0.3s ease; /* Transition de couleur douce */
+    }
+
+    .navbar-nav .nav-link:hover {
+        color: #f8f9fa; /* Couleur du texte au survol */
+    }
+
+    .dropdown-menu {
+        margin-top: 0; /* Ajustement du margin-top pour le dropdown */
+    }
+
+    .dropdown-menu .dropdown-item {
+        color: #212529; /* Couleur du texte des items du dropdown */
+        transition: background-color 0.3s ease, color 0.3s ease; /* Transition douce */
+    }
+
+    .dropdown-menu .dropdown-item:hover {
+        background-color: #f8f9fa; /* Couleur de fond au survol */
+        color: #495057; /* Couleur du texte au survol */
+    }
+</style>

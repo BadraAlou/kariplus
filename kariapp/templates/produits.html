@@ -1,0 +1,144 @@
+{% extends "base.html" %}
+{% block content %}
+{% load static %}
+
+<!-- Hero Start -->
+<div class="container-fluid bg-primary hero-header mb-5">
+    <div class="container text-center">
+        <h1 class="display-4 text-white mb-3 animated slideInDown">Produits</h1>
+    </div>
+</div>
+<!-- Hero End -->
+
+<!-- Category Start -->
+<div class="container py-5">
+    <div class="row justify-content-center">
+        {% for categorie, produits in produits_par_categories.items %}
+        <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+            <div class="card shadow-lg border-0">
+                <img src="{{ categorie.image.url }}" class="card-img-top img-fluid" alt="{{ categorie.nom }}">
+                <div class="card-body text-center">
+                    <h5 class="card-title text-primary">{{ categorie.nom }}</h5>
+                    <button type="button" class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modalCategorie{{ forloop.counter }}">
+                        Voir les produits
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal pour cette catégorie -->
+        <div class="modal fade" id="modalCategorie{{ forloop.counter }}" tabindex="-1" aria-labelledby="modalCategorie{{ forloop.counter }}Label" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalCategorie{{ forloop.counter }}Label">{{ categorie.nom }}</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row g-4">
+                            {% for produit in produits %}
+                            <div class="col-md-6 col-lg-4 mb-4">
+                                <div class="card product-card border-0 shadow-sm">
+                                    <img src="{{ produit.image.url }}" class="card-img-top" alt="{{ produit.nom }}">
+                                    <div class="card-body text-center">
+                                        <h5 class="card-title mb-3">{{ produit.nom }}</h5>
+                                        <p class="card-text text-primary mb-2">{{ produit.prix }} Francs CFA</p>
+                                        <div class="d-flex justify-content-center">
+                                            <button type="button" class="btn btn-outline-primary me-2 px-3" data-bs-toggle="modal" data-bs-target="#modalProduit{{ produit.id }}">
+                                                Voir détails
+                                            </button>
+                                            <a href="{% url 'ajouter_au_panier' produit.id %}" class="btn btn-primary px-3">
+                                                Ajouter au Panier
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Modal pour ce produit -->
+                            <div class="modal fade" id="modalProduit{{ produit.id }}" tabindex="-1" aria-labelledby="modalProduit{{ produit.id }}Label" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered modal-lg">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="modalProduit{{ produit.id }}Label">{{ produit.nom }}</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <img src="{{ produit.image.url }}" class="img-fluid mb-4" alt="{{ produit.nom }}">
+                                            <p>{{ produit.description }}</p>
+                                            <p>{{ produit.composants }}</p>
+                                            <p>{{ produit.mode_demploi }}</p>
+                                            <p>Prix: {{ produit.prix }} Francs CFA</p>
+                                            <div class="d-flex justify-content-center">
+                                                <a href="{% url 'ajouter_au_panier' produit.id %}" class="btn btn-primary me-3">
+                                                    Ajouter au Panier
+                                                </a>
+                                                <a href="{% url 'commande_directe' produit.id %}" class="btn btn-primary">
+                                                    Commander
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+<!-- Category End -->
+<!-- Conseils pour la Peau et le Beurre de Karité Start -->
+<div class="container-fluid skin-care-tips bg-primary my-5 py-5">
+    <div class="container text-white py-5">
+        <div class="mx-auto text-center wow fadeIn" data-wow-delay="0.1s" style="max-width: 800px;">
+            <h1 class="text-white mb-3"><span class="fw-light text-dark">Conseils pour une</span> Peau Éclatante avec le Beurre de Karité</h1>
+            <p class="lead mb-5">Découvrez comment intégrer le beurre de karité KariPlus dans votre routine de soin pour des résultats visibles et durables.</p>
+        </div>
+        <div class="row g-5">
+            <div class="col-lg-4 text-center wow fadeIn" data-wow-delay="0.1s">
+                <div class="btn-square rounded-circle border mx-auto mb-4" style="width: 120px; height: 120px;">
+                    <i class="fa fa-sun fa-3x text-dark"></i>
+                </div>
+                <h5 class="text-white">Hydratation Intensive</h5>
+                <hr class="w-25 bg-light my-2 mx-auto">
+                <span>Appliquez le beurre de karité après la douche pour une hydratation profonde de la peau.</span>
+            </div>
+            <div class="col-lg-4 text-center wow fadeIn" data-wow-delay="0.3s">
+                <div class="btn-square rounded-circle border mx-auto mb-4" style="width: 120px; height: 120px;">
+                    <i class="fa fa-leaf fa-3x text-dark"></i>
+                </div>
+                <h5 class="text-white">Soin des Peaux Sèches</h5>
+                <hr class="w-25 bg-light my-2 mx-auto">
+                <span>Idéal pour les peaux sèches et irritées, le beurre de karité nourrit en profondeur et apaise.</span>
+            </div>
+            <div class="col-lg-4 text-center wow fadeIn" data-wow-delay="0.5s">
+                <div class="btn-square rounded-circle border mx-auto mb-4" style="width: 120px; height: 120px;">
+                    <i class="fa fa-heart fa-3x text-dark"></i>
+                </div>
+                <h5 class="text-white">Anti-âge Naturel</h5>
+                <hr class="w-25 bg-light my-2 mx-auto">
+                <span>Utilisez régulièrement pour réduire les signes du vieillissement et améliorer l'élasticité de la peau.</span>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Conseils pour la Peau et le Beurre de Karité End -->
+
+
+
+{% endblock %}
+<script>
+/* Transitions pour les modales */
+.modal.fade .modal-dialog {
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.modal.fade.show .modal-dialog {
+    transform: translate(0, 0);
+    opacity: 1;
+}
+</script>

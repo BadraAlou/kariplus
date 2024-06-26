@@ -1,0 +1,119 @@
+{% extends "base.html" %}
+{% block content %}
+{% load static %}
+
+<div class="container-fluid bg-primary hero-header mb-5">
+    <div class="container text-center">
+        <h1 class="display-4 text-white mb-3 animated slideInDown">Contacts</h1>
+    </div>
+</div>
+
+<div class="container-fluid py-5">
+    <div class="container">
+        <div class="row g-4">
+            <div class="col-lg-4 wow fadeIn" data-wow-delay="0.1s">
+                <div class="contact-info-item position-relative bg-primary text-center p-3">
+                    <div class="border py-5 px-3">
+                        <a href="https://maps.app.goo.gl/eBMtHsWaw4W9vpCB8" target="_blank" class="text-dark mb-4"><i class="fa fa-map-marker-alt fa-3x"></i></a></br></br>
+                        <h5 class="text-white">Bamako-Mali</h5>
+                        <h5 class="fw-light text-white">Djalakorobougou</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 wow fadeIn" data-wow-delay="0.3s">
+                <div class="contact-info-item position-relative bg-primary text-center p-3">
+                    <div class="border py-5 px-3">
+                        <i class="fa fa-phone-alt fa-3x text-dark mb-4"></i>
+                        <h5 class="text-white">Telephone</h5>
+                        <h5 class="fw-light text-white">+223 92 36 13 39</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 wow fadeIn" data-wow-delay="0.5s">
+                <div class="contact-info-item position-relative bg-primary text-center p-3">
+                    <div class="border py-5 px-3">
+                        <i class="fa fa-envelope fa-3x text-dark mb-4"></i>
+                        <h5 class="text-white">Adresse-Mail</h5>
+                        <h5 class="fw-light text-white">contact@kariplus-mali.com</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- dans create_review.html -->
+
+<!-- Assurez-vous d'étendre votre modèle de base s'il y en a un -->
+
+
+<section id="submit_review" class="mt-5 py-5">
+    <div class="container shadow p-5 rounded" style="background-color: #f8f9fa;">
+        <div class="text-center mb-4">
+            <h4 class="mini_title text-success">Votre avis compte!</h4>
+            <h2 class="title text-dark">Partagez votre expérience avec KARIPLUS</h2>
+        </div>
+        <div class="row">
+            <!-- Formulaire -->
+            <div class="col-lg-6 mb-5 mb-lg-0">
+                <div class="form-container">
+                    <form method="post" action="{% url 'create_review' %}" class="needs-validation" novalidate>
+                        {% csrf_token %}
+                        <div class="mb-4">
+                            <label for="id_username" class="form-label">Nom:</label>
+                            <input type="text" class="form-control" id="id_username" name="username" required>
+                            <div class="invalid-feedback">Veuillez entrer votre nom d'utilisateur.</div>
+                        </div>
+                        <div class="mb-4">
+                            <label for="id_review" class="form-label">Votre avis:</label>
+                            <textarea class="form-control" id="id_review" name="review" rows="4" required></textarea>
+                            <div class="invalid-feedback">Veuillez entrer votre avis.</div>
+                        </div>
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary px-5 py-2">Soumettre</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <!-- Carte Google Maps -->
+            <div class="col-lg-6 wow fadeIn" data-wow-delay="0.5s">
+                <iframe class="w-100 h-100"
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31151.376651312476!2d-7.874327301979066!3d12.587386868668311!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xe51d362aa71cd6f%3A0xafdeb6ed07df1042!2sDialakorobougou!5e0!3m2!1sfr!2sml!4v1718961697904!5m2!1sfr!2sml" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+                    frameborder="0" style="min-height: 300px; border:0;" allowfullscreen="" aria-hidden="false" tabindex="0">
+                </iframe>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+
+
+<!-- Success Modal -->
+<div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="successModalLabel">Merci pour votre avis!</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Votre avis a été soumis avec succès.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Fermer</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% if form_submitted %}
+<script>
+    var successModal = new bootstrap.Modal(document.getElementById('successModal'));
+    successModal.show();
+</script>
+{% endif %}
+
+{% endblock %}
