@@ -24,7 +24,7 @@ SECRET_KEY = 'django-insecure-rmci+3hl51ejpkdcp4!!22-$5-whe_pkj$i6b!_001n+ghbn3#
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['kariplus-mali.com', 'www.kariplus-mali.com' ,'localhost']
 
 # settings.py
 
